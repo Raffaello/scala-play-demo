@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index
 
 GET     /hangperson                 controllers.HangPerson.index
-GET     /hangperson/new             controllers.HangPerson._new
+GET     /hangperson/new             controllers.HangPerson.newAction
 GET     /hangperson/create          controllers.Default.redirect(to = "/hangperson/show")
 POST    /hangperson/create          controllers.HangPerson.create
 GET     /hangperson/show            controllers.HangPerson.show

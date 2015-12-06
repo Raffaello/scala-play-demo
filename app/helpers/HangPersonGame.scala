@@ -52,9 +52,9 @@ class HangPersonGame(val word: String)
 
 object HangPersonGame
 {
-  def randomWord = {
+  def randomWord : String = {
     WS.url("http://watchout4snakes.com/wo4snakes/Random/RandomWord").get().map {
         response => (response.xml \ "span").text.toLowerCase
-      }
+      }.toString
   }
 }

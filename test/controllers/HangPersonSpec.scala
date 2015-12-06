@@ -1,6 +1,8 @@
 package controllers
 
+import helpers.HangPersonGame
 import org.junit.runner._
+import org.specs2.mock._
 import org.specs2.mutable._
 import org.specs2.runner._
 import play.api.test.Helpers._
@@ -22,8 +24,10 @@ class HangPersonSpec extends Specification
       redirectLocation(response) must beSome("/hangperson/show")
     }
 
-    "init session" in new WithApplication() {
-      failure
+    "init session" in new WithApplication() with Mockito {
+      val m = mock[HangPersonGame]
+      //m.expects.newInstance("garply")
+      val Some(response) = route(FakeRequest(POST, "hangperson/create"))
     }.pendingUntilFixed("not written")
 
     "word with guesses" in new WithApplication {
