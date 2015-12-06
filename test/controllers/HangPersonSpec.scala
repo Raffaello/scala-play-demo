@@ -10,7 +10,7 @@ import play.api.test._
 class HangPersonSpec extends Specification
 {
   "HangPerson" should  {
-    " /hangperson redirect to 'hangperson/new'" in new WithApplication {
+    "/hangperson redirect to 'hangperson/new'" in new WithApplication {
       val Some(response) = route(FakeRequest(GET, "/hangperson"))
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome("/hangperson/new")
