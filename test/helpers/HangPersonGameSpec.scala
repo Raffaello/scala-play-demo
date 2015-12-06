@@ -1,8 +1,10 @@
 package helpers
 
+import org.junit
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
+import org.specs2.specification.BeforeEach
 import play.api.test._
 
 @RunWith(classOf[JUnitRunner])
@@ -40,6 +42,8 @@ class HangPersonGameSpec extends Specification
     "Several letter" in new WithApplication() {
       val game = new HangPersonGame("garply")
       guess_several_letters(game, "aq")
+      game.guesses must beEqualTo("a")
+      game.wrongGuesses must beEqualTo("q")
 
       val valid1 = game.guess('a')
       game.guesses must beEqualTo("a")
@@ -51,9 +55,44 @@ class HangPersonGameSpec extends Specification
 
       game.guess('A').equals(false)
       game.guess('Q').equals(false)
-      game.guesses must not contain ("A")
-      game.guesses must not contain ("Q")
+      game.guesses must not contain "A"
+      game.guesses must not contain "Q"
     }
 
+    "Invalid" in new WithApplication {
+      val game = new HangPersonGame("foobar")
+      game.guess('%') must throwA[IllegalArgumentException]
+    }
+
+    "displayed word with guesses" in new WithApplication() {
+      Map(
+        "bn"  ->  "b-n-n-",
+        "def" -> "------",
+        "ban" -> "banana"
+      ).foreach(t => {
+        val game = new HangPersonGame("banana")
+        guess_several_letters(game, t._1)
+        game.wordWithGuesses must beEqualTo(t._2)
+      })
+    }
+
+    "game status win" in new WithApplication {
+      val game: HangPersonGame = new HangPersonGame("dog")
+      guess_several_letters(game, "ogd")
+      game.checkWinOrLose must beEqualTo(Some(true))
+    }
+
+    "game status lose" in new WithApplication {
+      val game: HangPersonGame = new HangPersonGame("dog")
+      game.guesses must beEqualTo("")
+      guess_several_letters(game, "tuvwxyzdog")
+      game.checkWinOrLose must beEqualTo(Some(false))
+    }
+
+    "game status play" in new WithApplication {
+      val game: HangPersonGame = new HangPersonGame("dog")
+      guess_several_letters(game, "dac")
+      game.checkWinOrLose must beEqualTo(None)
+    }
   }
 }
