@@ -9,17 +9,13 @@ class HangPerson extends Controller
   def game_=(_game: HangPersonGame) = this._game = _game
   def game = this._game
 
-  def index = Action {
-    Redirect(routes.HangPerson.newAction)
-  }
-
   def newAction = Action {
-    Ok(views.html.HangPerson.index("hang person game"))
+    Ok(views.html.HangPerson.newAction())
   }
 
   def create = Action {
     request =>
-      val word: String = request.session.get("word").getOrElse(HangPersonGame.randomWord).toString
+      val word: String = HangPersonGame.randomWord
       game = new HangPersonGame(word)
       Redirect(routes.HangPerson.show()).withSession(
         "word" -> word
@@ -27,6 +23,16 @@ class HangPerson extends Controller
   }
 
   def show = Action {
-    implicit request => Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
+    implicit request =>
+      if(game == null) {
+        Redirect(routes.HangPerson.newAction())
+      } else {
+        Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
+      }
+  }
+
+  def guess = Action {
+    // TODO
+    Redirect(routes.HangPerson.show())
   }
 }

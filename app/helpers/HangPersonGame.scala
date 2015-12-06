@@ -2,9 +2,11 @@ package helpers
 
 import play.api.libs.ws._
 import play.api.Play.current
-import scala.annotation.tailrec
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.matching.Regex
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.Logger
+
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 class HangPersonGame(val word: String)
 {
@@ -35,10 +37,6 @@ class HangPersonGame(val word: String)
     }
   }
 
-  def randomWord: Unit = {
-    HangPersonGame.randomWord
-  }
-
   def checkWinOrLose: Option[Boolean] = {
     if (wrongGuesses.length >= 7) Some(false)
     else if (guesses.toSet == word.toSet) Some(true)
@@ -52,9 +50,20 @@ class HangPersonGame(val word: String)
 
 object HangPersonGame
 {
-  def randomWord : String = {
-    WS.url("http://watchout4snakes.com/wo4snakes/Random/RandomWord").get().map {
-        response => (response.xml \ "span").text.toLowerCase
-      }.toString
+  def randomWord: String = {
+    val word = Await.result[String](WS.url("http://watchout4snakes.com/wo4snakes/Random/RandomWord").get().map {
+        response => {
+          //Logger.debug("resp: " + response.body)
+          (scala.xml.XML.loadString(response.body) \ "span").text
+        }
+
+      },5 minute)
+
+    Logger.debug("word: " + word)
+    if(word.isEmpty)
+      // TODO generate from a dictionary some random word. the WS is not working as aspected.
+      return "empty"
+    else
+      word
   }
 }
