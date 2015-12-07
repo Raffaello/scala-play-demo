@@ -5,6 +5,7 @@ version := "1.0-SNAPSHOT"
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.6"
+//ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
 libraryDependencies ++= Seq(
   jdbc,

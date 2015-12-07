@@ -14,8 +14,8 @@
     Word so far:
     <span class="word">@game_word_with_guesses</span>
 </p>
-<form action="/guess" method="post">
-    <input type="text" size="1" name="guess" autocomplete="off"/>
+<form action=@routes.HangPerson.guess method="post">
+    <input type="text" size="1" name="guess" autocomplete="off" required/>
     <input type="submit" value="Guess!"/>
 </form>
 @newAction()

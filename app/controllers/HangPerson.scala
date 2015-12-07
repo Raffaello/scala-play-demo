@@ -1,7 +1,10 @@
 package controllers
 
 import helpers.HangPersonGame
+import play.api.data._
+import play.api.data.Forms._
 import play.api.mvc._
+import play.api.Logger
 
 class HangPerson extends Controller
 {
@@ -31,8 +34,18 @@ class HangPerson extends Controller
       }
   }
 
+//  val guessForm = Form(
+//    "guess" -> nonEmptyText
+//  )
+
   def guess = Action {
-    // TODO
-    Redirect(routes.HangPerson.show())
+    request => {
+      val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
+      Logger.debug("c="+c)
+      if (game.guess(c))
+        Redirect(routes.HangPerson.show)
+      else
+        Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+    }
   }
 }

@@ -36,7 +36,7 @@ class HangPersonSpec extends Specification
 
     "work from within a browser" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson")
-      browser.pageSource must contain("hang person game")
+      browser.pageSource must contain("Hangperson")
     }
   }
 }
