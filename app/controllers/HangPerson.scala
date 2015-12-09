@@ -8,7 +8,7 @@ import play.api.Logger
 
 class HangPerson extends Controller
 {
-  var _game:HangPersonGame = null
+  var _game:HangPersonGame = new HangPersonGame(HangPersonGame.randomWord)
   def game_=(_game: HangPersonGame) = this._game = _game
   def game = this._game
 
@@ -30,7 +30,25 @@ class HangPerson extends Controller
       if(game == null) {
         Redirect(routes.HangPerson.newAction())
       } else {
-        Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
+        game.checkWinOrLose match {
+          case Some(true)   => Redirect(routes.HangPerson.win)
+          case Some(false)  => Redirect(routes.HangPerson.lose)
+          case _            => Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
+        }
+      }
+  }
+
+  def win = Action {
+      game.checkWinOrLose match {
+        case Some(true) => Ok(views.html.HangPerson.win(game.word))
+        case _          => Redirect(routes.HangPerson.show)
+      }
+  }
+
+  def lose = Action {
+      game.checkWinOrLose match {
+        case Some(false)  => Ok(views.html.HangPerson.lose(game.word))
+        case _            => Redirect(routes.HangPerson.show)
       }
   }
 
