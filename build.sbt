@@ -4,7 +4,7 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 //ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
 libraryDependencies ++= Seq(
@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   ws,
   specs2 % Test,
   "org.webjars" % "bootstrap" % "3.3.6",
-  "org.scalaj" %% "scalaj-http" % "2.1.0"
+  //"org.scalaj" %% "scalaj-http" % "2.1.0"
+  "net.ruippeixotog" %% "scala-scraper" % "1.0.0"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
