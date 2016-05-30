@@ -7,11 +7,6 @@ import play.api.Logger
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import net.ruippeixotog.scalascraper.browser.HtmlUnitBrowser
-import net.ruippeixotog.scalascraper.dsl.DSL._
-import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
-import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
-import net.ruippeixotog.scalascraper.model.Element
 
 class HangPersonGame(val word: String)
 {
@@ -56,19 +51,13 @@ class HangPersonGame(val word: String)
 object HangPersonGame
 {
   def randomWord: String = {
-/*
-    val word = Await.result[String](WS.url("http://watchout4snakes.com/wo4snakes/Random/RandomWord").get().map {
+    val word = Await.result[String](WS.url("http://watchout4snakes.com/wo4snakes/Random/RandomWord").post(Map("LastWord" -> Seq(""))).map {
         response => {
-          //Logger.debug("resp: " + response.body)
-          (scala.xml.XML.loadString(response.body) \ "span").text
+          Logger.debug("resp: " + response.body)
+          response.body
         }
 
       },5 minute)
-*/
-    val browser = HtmlUnitBrowser()
-    val doc = browser.get("http://watchout4snakes.com/wo4snakes/Random/RandomWord")
-    val e : Element = doc >> element("#result")
-    val word: String = e.innerHtml
 
     Logger.debug("word: " + word)
     if(word.isEmpty)
