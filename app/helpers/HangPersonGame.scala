@@ -65,8 +65,10 @@ object HangPersonGame
 
       },5 minute)
 */
-    val word : String = (HtmlUnitBrowser()
-      .get("http://watchout4snakes.com/wo4snakes/Random/RandomWord")>> element("#result")).innerHtml
+    val browser = HtmlUnitBrowser()
+    val doc = browser.get("http://watchout4snakes.com/wo4snakes/Random/RandomWord")
+    val e : Element = doc >> element("#result")
+    val word: String = e.innerHtml
 
     Logger.debug("word: " + word)
     if(word.isEmpty)

@@ -12,6 +12,8 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   specs2 % Test,
+  "org.specs2" %% "specs2-core" % "3.8.3" % "test",
+  "org.specs2" %% "specs2-junit" % "3.8.3" % "test",
   "org.webjars" % "bootstrap" % "3.3.6",
   //"org.scalaj" %% "scalaj-http" % "2.1.0"
   "net.ruippeixotog" %% "scala-scraper" % "1.0.0"
