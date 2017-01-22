@@ -8,5 +8,5 @@ env:
 #  - unzip -q play-${PLAY_VERSION}.zip
 #script: play-${PLAY_VERSION}/play test
 before_script:
-  - ls -all
+  - unset SBT_OPTS JVM_OPTS
 script: ./activator test
