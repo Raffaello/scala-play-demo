@@ -22,3 +22,4 @@ routesGenerator := InjectedRoutesGenerator
 fork in run := true
 
 herokuAppName in Compile := "lit-spire-71369"
+herokuJdkVersion in Compile := "1.8"
