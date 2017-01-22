@@ -1,2 +1,3 @@
 language: scala
-script: activator test
+scala:
+  - 2.11.8
