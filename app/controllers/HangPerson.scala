@@ -1,16 +1,12 @@
 package controllers
 
 import helpers.HangPersonGame
-import play.api.data._
-import play.api.data.Forms._
 import play.api.mvc._
 import play.api.Logger
 
 class HangPerson extends Controller
 {
-  var _game:HangPersonGame = new HangPersonGame(HangPersonGame.randomWord)
-  def game_=(_game: HangPersonGame) = this._game = _game
-  def game = this._game
+  var game:HangPersonGame = new HangPersonGame(HangPersonGame.randomWord)
 
   def newAction = Action {
     Ok(views.html.HangPerson.newAction())
@@ -20,7 +16,7 @@ class HangPerson extends Controller
     request =>
       val word: String = HangPersonGame.randomWord
       game = new HangPersonGame(word)
-      Redirect(routes.HangPerson.show()).withSession(
+      Redirect(routes.HangPerson.show).withSession(
         "word" -> word
       )
   }
@@ -52,10 +48,6 @@ class HangPerson extends Controller
       }
   }
 
-//  val guessForm = Form(
-//    "guess" -> nonEmptyText
-//  )
-
   def guess = Action {
     request => {
       val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
@@ -63,7 +55,7 @@ class HangPerson extends Controller
       if (game.guess(c))
         Redirect(routes.HangPerson.show)
       else
-        Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+        Redirect(routes.HangPerson.show).flashing("error" -> "You have already used that letter.")
     }
   }
 }

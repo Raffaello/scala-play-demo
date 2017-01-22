@@ -4,24 +4,20 @@ import play.api.libs.ws._
 import play.api.Play.current
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.Logger
-
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 class HangPersonGame(val word: String)
 {
-  var _guesses: String = ""
-  def guesses_=(_guesses: String) = this._guesses = _guesses
-  def guesses = this._guesses
-
-  var _wrong_guesses: String = ""
-  def wrongGuesses_=(_wrong_guesses: String) = this._wrong_guesses = _wrong_guesses
-  def wrongGuesses = this._wrong_guesses
+  var guesses:String = ""
+  var wrongGuesses:String = ""
 
   def guess(letter: Char): Boolean = {
     val l = letter.toLower
     def isNotValidLetter(c: Char): Boolean = c < 'a' || c > 'z'
     if (isNotValidLetter(l)) throw new IllegalArgumentException(letter + " is not a valid letter (" + l + ")")
+
     if (word.contains(l))
       if (guesses.contains(l))
         false
@@ -62,7 +58,7 @@ object HangPersonGame
     Logger.debug("word: " + word)
     if(word.isEmpty)
       // TODO generate from a dictionary some random word. the WS is not working as aspected.
-      return "empty"
+      "empty"
     else
       word
   }
