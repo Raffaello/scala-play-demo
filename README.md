@@ -1,6 +1,6 @@
 ## Scala Play! simple Hangouts game
 
-[](https://travis-ci.org/Raffaello/scala-play-demo.svg?branch=master)
+[![Build Status](https://travis-ci.org/Raffaello/scala-play-demo.svg?branch=master)](https://travis-ci.org/Raffaello/scala-play-demo)
 
 - CI on TravisCI
 - CD on Heroku
