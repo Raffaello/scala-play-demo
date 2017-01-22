@@ -24,16 +24,6 @@ class HangPersonSpec extends Specification
       redirectLocation(response) must beSome("/hangperson/show")
     }
 
-    "init session" in new WithApplication() with Mockito {
-      val m = mock[HangPersonGame]
-      //m.expects.newInstance("garply")
-      val Some(response) = route(FakeRequest(POST, "hangperson/create"))
-    }.pendingUntilFixed("not written")
-
-    "word with guesses" in new WithApplication {
-      failure
-    }.pendingUntilFixed
-
     "work from within a browser" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson")
       browser.pageSource must contain("Hangperson")
