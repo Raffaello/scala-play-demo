@@ -20,3 +20,5 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 routesGenerator := InjectedRoutesGenerator
 
 fork in run := true
+
+herokuAppName in Compile := "lit-spire-71369"
