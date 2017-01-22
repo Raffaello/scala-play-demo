@@ -37,14 +37,14 @@ class HangPerson extends Controller
   def win = Action {
       game.checkWinOrLose match {
         case Some(true) => Ok(views.html.HangPerson.win(game.word))
-        case _          => Redirect(routes.HangPerson.show)
+        case _          => Redirect(routes.HangPerson.show())
       }
   }
 
   def lose = Action {
       game.checkWinOrLose match {
         case Some(false)  => Ok(views.html.HangPerson.lose(game.word))
-        case _            => Redirect(routes.HangPerson.show)
+        case _            => Redirect(routes.HangPerson.show())
       }
   }
 
@@ -53,9 +53,9 @@ class HangPerson extends Controller
       val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
       Logger.debug("c="+c)
       if (game.guess(c))
-        Redirect(routes.HangPerson.show)
+        Redirect(routes.HangPerson.show())
       else
-        Redirect(routes.HangPerson.show).flashing("error" -> "You have already used that letter.")
+        Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
     }
   }
 }
