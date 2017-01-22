@@ -16,7 +16,7 @@ class HangPerson extends Controller
     request =>
       val word: String = HangPersonGame.randomWord
       game = new HangPersonGame(word)
-      Redirect(routes.HangPerson.show).withSession(
+      Redirect(routes.HangPerson.show()).withSession(
         "word" -> word
       )
   }
@@ -27,8 +27,8 @@ class HangPerson extends Controller
         Redirect(routes.HangPerson.newAction())
       } else {
         game.checkWinOrLose match {
-          case Some(true)   => Redirect(routes.HangPerson.win)
-          case Some(false)  => Redirect(routes.HangPerson.lose)
+          case Some(true)   => Redirect(routes.HangPerson.win())
+          case Some(false)  => Redirect(routes.HangPerson.lose())
           case _            => Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
         }
       }
