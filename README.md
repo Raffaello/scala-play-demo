@@ -9,4 +9,4 @@
 
 [Base](https://lit-spire-71369.herokuapp.com/)
 
-[HangPerson Game](https://lit-spire-71369.herokuapp.com//hangperson)
+[HangPerson Game](https://lit-spire-71369.herokuapp.com/hangperson)
