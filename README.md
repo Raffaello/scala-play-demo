@@ -1,9 +1,12 @@
-This is your new Play application
-=================================
+## Scala Play! simple Hangouts game
 
-This file will be packaged with your application, when using `activator dist`.
+(https://travis-ci.org/Raffaello/scala-play-demo.svg?branch=master)
 
+- CI on TravisCI
+- CD on Heroku
 
-Hangperson DEMO at:
-https://lit-spire-71369.herokuapp.com/
-https://lit-spire-71369.herokuapp.com//hangperson
+### Hangperson DEMO at:
+
+[Base](https://lit-spire-71369.herokuapp.com/)
+
+[HangPerson Game](https://lit-spire-71369.herokuapp.com//hangperson)
