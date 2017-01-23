@@ -6,7 +6,7 @@ import play.api.Logger
 
 class HangPerson extends Controller
 {
-  var game:HangPersonGame = HangPersonGame(HangPersonGame.randomWord)
+  var game:HangPersonGame = new HangPersonGame(HangPersonGame.randomWord)
 
   def newAction = Action {
     Ok(views.html.HangPerson.newAction())
@@ -15,7 +15,7 @@ class HangPerson extends Controller
   def create = Action {
     request =>
       val word: String = HangPersonGame.randomWord
-      game = HangPersonGame(word)
+      game = new HangPersonGame(word)
       Redirect(routes.HangPerson.show()).withSession(
         "word" -> word
       )
