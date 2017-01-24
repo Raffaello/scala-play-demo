@@ -52,10 +52,15 @@ class HangPerson extends Controller
     request => {
       val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
       Logger.debug("c="+c)
-      if (game.guess(c))
-        Redirect(routes.HangPerson.show())
-      else
-        Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+      try {
+        if (game.guess(c))
+          Redirect(routes.HangPerson.show())
+        else
+          Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+      } catch {
+        case e:IllegalArgumentException =>
+          Redirect(routes.HangPerson.show()).flashing("error" -> ("Character '" + c + "' not valid!"))
+      }
     }
   }
 }
