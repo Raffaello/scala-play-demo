@@ -59,7 +59,7 @@ class HangPerson extends Controller
           Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
       } catch {
         case e:IllegalArgumentException =>
-          Redirect(routes.HangPerson.show()).flashing("error" -> ("Character '" + c + "' not valid!"))
+          Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
       }
     }
   }
