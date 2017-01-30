@@ -13,6 +13,7 @@ GET     /hangperson/show            controllers.HangPerson.show
 POST    /hangperson/guess           controllers.HangPerson.guess
 GET     /hangperson/win             controllers.HangPerson.win
 GET     /hangperson/lose            controllers.HangPerson.lose
+GET     /hangperson/reactJs         controllers.ReactJs.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

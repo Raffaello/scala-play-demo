@@ -9,3 +9,5 @@ target
 /.sbtserver
 project/.sbtserver
 project/.sbtserver.lock
+/reactApp/node_modules/
+/reactApp/npm-debug.log
