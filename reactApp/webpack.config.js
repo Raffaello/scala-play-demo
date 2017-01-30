@@ -1,15 +1,13 @@
 'use strict';
 
-var webpack   = require('webpack'),
+var webpack   = require('webpack');
 var path      = require('path');
 var BUILD_DIR = path.resolve(__dirname, 'build');
 var APP_DIR   = path.resolve(__dirname, 'app');
 
 var config = {
     target: 'web',
-    entry: {
-        path.join(APP_DIR, 'main.jsx'),
-    },
+    entry: APP_DIR + '/main.jsx',
 //    resolve: {
 //        alias: {},
 //        root: APP_DIR,

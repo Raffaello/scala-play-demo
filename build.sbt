@@ -1,4 +1,4 @@
-import play.sbt.PlayImport.PlayKeys.playRunHooks
+//import play.sbt.PlayImport.PlayKeys.playRunHooks
 
 name := """scala-play-demo"""
 
@@ -16,17 +16,17 @@ libraryDependencies ++= Seq(
 //  "com.codeborne" % "phantomjsdriver" % "1.2.1"
 )
 
-playRunHooks <+= baseDirectory.map(Webpack.apply)
+//playRunHooks <+= (baseDirectory / "reactApp/node_modules/.bin/").map(Webpack.apply)
 
-excludeFilter in (Assets, JshintKeys.jshint) := "*.js"
+//excludeFilter in (Assets, JshintKeys.jshint) := "*.js"
 
-watchSources ~= { (ws: Seq[File]) =>
-  ws filterNot { path =>
-    path.getName.endsWith(".js") || path.getName == "build"
-  }
-}
+//watchSources ~= { (ws: Seq[File]) =>
+//  ws filterNot { path =>
+//    path.getName.endsWith(".js") || path.getName == "build"
+//  }
+//}
 
-pipelineStages := Seq(digest)
+//pipelineStages := Seq(digest)
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
