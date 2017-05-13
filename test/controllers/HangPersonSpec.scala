@@ -13,13 +13,13 @@ class HangPersonSpec extends Specification
 {
   "HangPerson" should  {
     "/hangperson redirect to 'hangperson/new'" in new WithApplication {
-      val Some(response) = route(FakeRequest(GET, "/hangperson"))
+      val Some(response) = route(app, FakeRequest(GET, "/hangperson"))
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome("/hangperson/new")
     }
 
     "GET 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
-      val Some(response) = route(FakeRequest(GET, "/hangperson/create"))
+      val Some(response) = route(app, FakeRequest(GET, "/hangperson/create"))
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome("/hangperson/show")
     }
