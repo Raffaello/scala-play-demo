@@ -1,13 +1,14 @@
 package helpers
 
-class HangPersonGame(val word: String)
-{
-  var guesses:String = ""
-  var wrongGuesses:String = ""
+class HangPersonGame(val word: String) {
+  var guesses: String = ""
+  var wrongGuesses: String = ""
 
   def guess(letter: Char): Boolean = {
     val l = letter.toLower
+
     def isNotValidLetter(c: Char): Boolean = c < 'a' || c > 'z'
+
     if (isNotValidLetter(l)) throw new IllegalArgumentException(letter + " is not a valid letter (" + l + ")")
 
     if (word.contains(l))
@@ -32,6 +33,6 @@ class HangPersonGame(val word: String)
   }
 
   def wordWithGuesses: String = {
-    word.map(l => if (guesses.contains(l)) l else '-' )
+    word.map(l => if (guesses.contains(l)) l else '-')
   }
 }

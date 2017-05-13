@@ -1,8 +1,6 @@
 package controllers
 
-import helpers.HangPersonGame
 import org.junit.runner._
-import org.specs2.mock._
 import org.specs2.mutable._
 import org.specs2.runner._
 import play.api.test.Helpers._
