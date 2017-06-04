@@ -23,14 +23,14 @@ object Settings {
   object versions {
     val scala = "2.11.11"
     val scalaDom = "0.9.1"
-    //    val scalajsReact = "0.11.3"
+    val scalajsReact = "0.11.3"
     //    val scalaCSS = "0.5.0"
     //    val log4js = "1.4.10"
     //    val autowire = "0.2.5"
     //    val booPickle = "1.2.5"
     //    val diode = "1.1.0"
     //    val uTest = "0.4.4"
-    //    val react = "15.3.1"
+    val react = "15.3.2"
     //    val jQuery = "1.11.1"
     //    val bootstrap = "3.3.6"
     //    val chartjs = "2.1.3"
@@ -49,7 +49,9 @@ object Settings {
   /** Dependencies only used by the JVM project */
   val playDependencies = Def.setting(Seq(
     "com.vmunier" %% "scalajs-scripts" % versions.scalajsScripts,
-    //    "org.webjars" % "font-awesome" % "4.3.0-1" % Provided,
+    "org.webjars.bower" % "compass-mixins" % "0.12.7",
+
+      //    "org.webjars" % "font-awesome" % "4.3.0-1" % Provided,
     //    "org.webjars" % "bootstrap" % versions.bootstrap % Provided,
     //    "com.lihaoyi" %% "utest" % versions.uTest % Test
     //    jdbc,
@@ -60,19 +62,21 @@ object Settings {
 
   /** Dependencies only used by the JS project (note the use of %%% instead of %%) */
   val scalajsDependencies = Def.setting(Seq(
-    //    "com.github.japgolly.scalajs-react" %%% "core" % versions.scalajsReact,
-    //    "com.github.japgolly.scalajs-react" %%% "extra" % versions.scalajsReact,
-    //    "com.github.japgolly.scalacss" %%% "ext-react" % versions.scalaCSS,
+        "com.github.japgolly.scalajs-react" %%% "core" % versions.scalajsReact,
+        "com.github.japgolly.scalajs-react" %%% "extra" % versions.scalajsReact,
+//        "com.github.japgolly.scalacss" %%% "ext-react" % versions.scalaCSS,
     //    "me.chrons" %%% "diode" % versions.diode,
     //    "me.chrons" %%% "diode-react" % versions.diode,
-    "org.scala-js" %%% "scalajs-dom" % versions.scalaDom //,
+        "org.scala-js" %%% "scalajs-dom" % versions.scalaDom //,
     //    "com.lihaoyi" %%% "utest" % versions.uTest % Test
   ))
 
   /** Dependencies for external JS libs that are bundled into a single .js file according to dependency order */
   val jsDependencies = Def.setting(Seq(
-    //    "org.webjars.bower" % "react" % versions.react / "react-with-addons.js" minified "react-with-addons.min.js" commonJSName "React",
-    //    "org.webjars.bower" % "react" % versions.react / "react-dom.js" minified "react-dom.min.js" dependsOn "react-with-addons.js" commonJSName "ReactDOM",
+        "org.webjars.bower" % "react" % versions.react / "react-with-addons.js" minified "react-with-addons.min.js" commonJSName "React",
+        "org.webjars.bower" % "react" % versions.react / "react-dom.js" minified "react-dom.min.js" dependsOn "react-with-addons.js" commonJSName "ReactDOM",
+        "org.webjars.bower" % "react" % versions.react / "react-dom-server.js" minified  "react-dom-server.min.js" dependsOn "react-dom.js" commonJSName "ReactDOMServer"
+
     //    "org.webjars" % "jquery" % versions.jQuery / "jquery.js" minified "jquery.min.js",
     //    "org.webjars" % "bootstrap" % versions.bootstrap / "bootstrap.js" minified "bootstrap.min.js" dependsOn "jquery.js",
     //    "org.webjars" % "chartjs" % versions.chartjs / "Chart.js" minified "Chart.min.js",

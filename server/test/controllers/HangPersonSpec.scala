@@ -26,5 +26,10 @@ class HangPersonSpec extends Specification
       browser.goTo("http://localhost:" + port + "/hangperson")
       browser.pageSource must contain("Hangperson")
     }
+
+    "work from within a browser" in new WithBrowser {
+      browser.goTo("http://localhost:" + port + "/hangperson/spa")
+      browser.pageSource must contain("Hang Person SPA")
+    }
   }
 }

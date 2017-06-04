@@ -86,4 +86,8 @@ class HangPerson @Inject()(ws: WSClient) extends Controller {
       }
     }
   }
+
+  def spa = Action {
+    Ok(views.html.HangPerson.spa())
+  }
 }
