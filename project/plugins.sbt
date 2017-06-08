@@ -5,7 +5,6 @@ resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.5.15")
 
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.16")
-//addSbtPlugin("com.typesafe.sbt" % "sbt-less" % "1.0.6")
 addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.2")
 addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.0")
 addSbtPlugin("com.vmunier" % "sbt-web-scalajs" % "1.0.4")
