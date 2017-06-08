@@ -1,14 +1,14 @@
 language: scala
 scala:
   - 2.11.11
-  - 2.12.2
+  #- 2.12.2
 sudo: false
 dist: trusty
 jdk:
     - oraclejdk8
     - openjdk8
 env:
-  - PLAY_VERSION=2.5.14
+  - PLAY_VERSION=2.5.15
 cache:
   directories:
     - '$HOME/.ivy2/cache'
