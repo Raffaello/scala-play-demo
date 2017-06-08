@@ -28,12 +28,15 @@ lazy val client: Project = (project in file("client"))
     elideOptions := Seq(),
     scalacOptions ++= elideOptions.value,
     jsDependencies ++= Settings.jsDependencies.value,
+//    npmDependencies in Compile ++= Settings.npmDependencies,
+//    npmDevDependencies in Compile ++= Settings.npmDevDependencies,
     // RuntimeDOM is needed for tests
-    //    jsDependencies += RuntimeDOM % "test",
+    jsDependencies += RuntimeDOM % "test",
     // yes, we want to package JS dependencies
     skip in packageJSDependencies := false
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
+//  .enablePlugins(ScalaJSBundlerPlugin)
   .dependsOn(sharedJS)
 
 // Client projects (just one in this case)

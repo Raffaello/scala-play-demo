@@ -1,44 +1,53 @@
+@import "lib/compass-mixins/lib/compass";
+@import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
+
+$col-teal: #008080;
+$col-word: #0432ff;
+$col-guesses: #ff2600;
+$col-red: #f00;
+$col-green: #008000;
+$col-grey: #808080;
+
 body {
-	font-family: Helvetica, Arial, Geneva, sans-serif;
-	padding: 2em;
-	border: 8px solid teal;
+  border: 8px solid $col-teal;
+  font-family: Helvetica, Arial, Geneva, sans-serif;
+  padding: 2em;
 }
 
 span {
-    word {
-        text-transform: uppercase;
-        letter-spacing: 4px;
-        color: #0432ff;
-        font-weight: bold;
-        font-size: larger;
-        padding-left: 2em;
-    }
+  .word {
+    color: $col-word;
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 4px;
+    padding-left: 2em;
+    text-transform: uppercase;
+  }
 
-    guesses {
-        color: #ff2600;
-        font-weight: bold;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        padding-left: 1em;
-    }
+  .guesses {
+    color: $col-guesses;
+    font-weight: bold;
+    letter-spacing: 4px;
+    padding-left: 1em;
+    text-transform: uppercase;
+  }
 
-    lose {
-        color: red;
-        font-weight: bold;
-    }
+  .lose {
+    color: $col-red;
+    font-weight: bold;
+  }
 
-    error {
-      color: red;
-    }
+  .error {
+    color: $col-red;
+  }
 
-    win {
-            color: green;
-            font-weight: bold;
-    }
-
+  .win {
+    color: $col-green;
+    font-weight: bold;
+  }
 }
 
 form {
-	border: 1px solid grey;
-	margin: 4px;
+  border: 1px solid $col-grey;
+  margin: 4px;
 }
