@@ -60,7 +60,7 @@ lazy val server = (project in file("server"))
     // compress CSS
     //    LessKeys.compress in Assets := true
   )
-  .enablePlugins(PlayScala)
+  .enablePlugins(PlayScala, SbtWeb)
   .dependsOn(sharedJVM)
 
 // Command for building a release
