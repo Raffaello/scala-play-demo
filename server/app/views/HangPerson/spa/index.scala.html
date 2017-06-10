@@ -3,24 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Hang Person SPA with scalaJS and ReactJS</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <title>Hang Person SPA with scalaJS and ReactJS</title>
         <!-- Latest compiled and minified JavaScript -->
         <script src="@routes.Assets.versioned("lib/jquery/dist/jquery.min.js")"></script>
         <script src="@routes.Assets.versioned("lib/bootstrap-sass/assets/javascripts/bootstrap.min.js")"></script>
 
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/spa.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     </head>
     <body>
-        <div class="jumbotron">
-            <h1 class="">ScalaJS with Bootstrap3!</h1>
-            <p>ScalaJS with customized Boostrap-sass</p>
-            <p>Boostrap-compass</p>
-            <p>Compass-mixing</p>
-            <p>JQuery3</p>
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h1 class="">ScalaJS with Bootstrap3!</h1>
+                <p>ScalaJS with customized Boostrap-sass</p>
+                <p>Boostrap-compass</p>
+                <p>Compass-mixing</p>
+                <p>JQuery3</p>
+            </div>
+            <div id="root"></div>
         </div>
-        <div id="root"></div>
         @scalajs.html.scripts("client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null)
     </body>
 </html>

@@ -1,9 +1,11 @@
 @(game_word: String)
-<h1>You Win!</h1>
+@base {
+    <h1>You Win!</h1>
 
-<p>
-    The word was
-    <span class="win">@game_word</span>.
-</p>
+    <p>
+        The word was
+        <span class="win">@game_word</span>.
+    </p>
 
-@newAction()
+    @newAction()
+}

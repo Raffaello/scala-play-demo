@@ -3,8 +3,6 @@
 @import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
 
 $color-teal: #008080;
-$color-word: #0432ff;
-$color-guesses: #ff2600;
 $color-red: #f00;
 $color-green: #008000;
 $color-grey: #808080;
@@ -15,40 +13,21 @@ body {
   padding: 2em;
 }
 
-span {
-  .word {
-    color: $color-word;
-    font-size: larger;
-    font-weight: bold;
-    letter-spacing: 4px;
-    padding-left: 2em;
-    text-transform: uppercase;
-  }
-
-  .guesses {
-    color: $color-guesses;
-    font-weight: bold;
-    letter-spacing: 4px;
-    padding-left: 1em;
-    text-transform: uppercase;
-  }
-
-  .lose {
-    color: $color-red;
-    font-weight: bold;
-  }
-
-  .error {
-    color: $color-red;
-  }
-
-  .win {
-    color: $color-green;
-    font-weight: bold;
-  }
+.text-guesses {
+  @extend .text-danger;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-form {
-  border: 1px solid $color-grey;
-  margin: 4px;
+.text-word {
+  @extend .text-info;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+span.lose {
+  color: $color-red;
+  font-weight: bold;
 }

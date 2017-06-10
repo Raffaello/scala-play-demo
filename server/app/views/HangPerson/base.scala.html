@@ -1,20 +1,25 @@
+@(content: Html)
+
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")" type="text/css">
-    <title>Hangperson</title>
-</head>
-<body>
-<div class="container">
-    <div id="header" class="span-24">
-        <p>Play Hangperson!</p>
-    </div>
-    <div class="span-24">
-
-    </div>
-    <div id="footer" class="span-24">
-        <p>Random word generator provided by Watchout4snakes.com -- thanks!</p>
-    </div>
-</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <title>Hangperson</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="page-header">
+                <div id="header" class="span-24">
+                    <h1>Play Hangperson!</h1>
+                </div>
+            </div>
+            <div class="panel panel-default">@content</div>
+        </div>
+        <footer id="footer" class="span-24 text-muted">
+            <p>Random word generator provided by Watchout4snakes.com -- thanks!</p>
+        </footer>
+    </body>
 </html>
