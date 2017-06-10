@@ -16,10 +16,33 @@ class HangPersonSpec extends Specification
       redirectLocation(response) must beSome("/hangperson/new")
     }
 
+
     "GET 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
       val Some(response) = route(app, FakeRequest(GET, "/hangperson/create"))
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome("/hangperson/show")
+    }
+
+    "POST 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
+      val Some(response) = route(app, FakeRequest(POST, "/hangperson/create"))
+      status(response) must equalTo(SEE_OTHER)
+      redirectLocation(response) must beSome("/hangperson/show")
+    }
+
+    "GET 'hangperson/show' redirect to 'hangperson/new' " in new WithApplication {
+      val Some(response) = route(app, FakeRequest(GET, "/hangperson/show"))
+      status(response) must equalTo(SEE_OTHER)
+      redirectLocation(response) must beSome("/hangperson/new")
+    }
+
+    "GET 'hangperson/show' after POST '/hangpreson/create'" in new WithApplication {
+      "POST 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
+        val Some(response) = route(app, FakeRequest(POST, "/hangperson/create"))
+        status(response) must equalTo(SEE_OTHER)
+        redirectLocation(response) must beSome("/hangperson/show")
+      }
+      val Some(response2) = route(app, FakeRequest(GET, "/hangperson/show").withSession(("word", "test")))
+      status(response2) must equalTo(OK)
     }
 
     "work from within a browser" in new WithBrowser {
@@ -27,7 +50,7 @@ class HangPersonSpec extends Specification
       browser.pageSource must contain("Hangperson")
     }
 
-    "work from within a browser" in new WithBrowser {
+    "work from within a browser SPA" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson/spa")
       browser.pageSource must contain("Hang Person SPA")
     }

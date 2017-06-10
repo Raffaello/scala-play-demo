@@ -1,17 +1,22 @@
 package controllers
 
 import javax.inject.Inject
+
 import helpers.HangPersonGame
 import play.api.mvc._
 import play.api.Logger
 import play.api.libs.ws.WSClient
+
 import scala.concurrent.duration._
 import scala.concurrent.Await
 import scala.language.postfixOps
 import scala.concurrent.ExecutionContext.Implicits.global
+import forms.HangPersonForm
+import play.api.i18n.MessagesApi
+import play.api.i18n.I18nSupport
 
-class HangPerson @Inject()(ws: WSClient) extends Controller {
-  var game: HangPersonGame = new HangPersonGame(randomWord)
+class HangPerson @Inject() (val messagesApi: MessagesApi, ws: WSClient) extends Controller with I18nSupport {
+  var game: HangPersonGame = _
 
   def randomWord: String = {
     val URL = "http://watchout4snakes.com/wo4snakes/Random/RandomWord"
@@ -38,9 +43,7 @@ class HangPerson @Inject()(ws: WSClient) extends Controller {
   def create = Action {
     val word: String = randomWord
     game = new HangPersonGame(word)
-    Redirect(routes.HangPerson.show()).withSession(
-      "word" -> word
-    )
+    Redirect(routes.HangPerson.show())
   }
 
   def show = Action {
@@ -51,7 +54,7 @@ class HangPerson @Inject()(ws: WSClient) extends Controller {
         game.checkWinOrLose match {
           case Some(true) => Redirect(routes.HangPerson.win())
           case Some(false) => Redirect(routes.HangPerson.lose())
-          case _ => Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses))
+          case _ => Ok(views.html.HangPerson.show(game.wrongGuesses, game.wordWithGuesses, HangPersonForm.HangPersonForm))
         }
       }
     }

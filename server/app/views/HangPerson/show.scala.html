@@ -1,4 +1,7 @@
-@(game_wrong_guesses: String, game_word_with_guesses: String)(implicit flash: Flash)
+@import forms.HangPersonForm.HangPersonData
+@import helper._
+
+@(game_wrong_guesses: String, game_word_with_guesses: String, hangPersonForm: Form[HangPersonData])(implicit messages: Messages, flash: Flash)
 
 @base {
     <div class="panel-body">
@@ -15,12 +18,23 @@
             <span class="text-word">@game_word_with_guesses</span>
         </p>
 
-        <form class="form-inline" action=@routes.HangPerson.guess method="post">
+        @*<form class="form-inline" action=@routes.HangPerson.guess method="post">*@
+        @*<label for="guess">Guess a letter</label>*@
+        @*<input type="text" class="form-control" size="1" class="form-control" id="guess" name="guess" autocomplete="off" required placeholder="?">*@
+        @*<input type="submit" value="Guess!"/>*@
+        @*</form>*@
+        @form(action = routes.HangPerson.guess, 'class -> "form-inline", 'method -> "post") {
+            @* @hangPersonForm.globalErrors.map {*@
+                @*error =>*@
+                @*<p class="alert-danger">*@
+                @* @error.message*@
+                @*</p>*@
+            @*}*@
+            @* @inputText(hangPersonForm("letter"), 'class -> "form-controle", 'size -> "1", 'id -> "guess", 'name -> "guess", 'autocomplete -> "off", 'required -> "required", 'placeholder -> "?") *@
             <label for="guess">Guess a letter</label>
-            <input type="text" class="form-control" size="1" class="form-control" id="guess" name="guess" autocomplete="off" required placeholder="?">
-            @*<input type="text" size="1" name="guess" autocomplete="off" required/>*@
+            <input type="text" class="form-control" size="1" id="guess" name="guess" autocomplete="off" required placeholder="?">
             <input type="submit" value="Guess!"/>
-        </form>
+        }
     </div>
 
     @newActionSnippet()
