@@ -2,22 +2,22 @@
 @import "lib/bootstrap-sass/assets/stylesheets/bootstrap-compass";
 @import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
 
-$col-teal: #008080;
-$col-word: #0432ff;
-$col-guesses: #ff2600;
-$col-red: #f00;
-$col-green: #008000;
-$col-grey: #808080;
+$color-teal: #008080;
+$color-word: #0432ff;
+$color-guesses: #ff2600;
+$color-red: #f00;
+$color-green: #008000;
+$color-grey: #808080;
 
 body {
-  border: 8px solid $col-teal;
+  border: 8px solid $color-teal;
   font-family: Helvetica, Arial, Geneva, sans-serif;
   padding: 2em;
 }
 
 span {
   .word {
-    color: $col-word;
+    color: $color-word;
     font-size: larger;
     font-weight: bold;
     letter-spacing: 4px;
@@ -26,7 +26,7 @@ span {
   }
 
   .guesses {
-    color: $col-guesses;
+    color: $color-guesses;
     font-weight: bold;
     letter-spacing: 4px;
     padding-left: 1em;
@@ -34,21 +34,21 @@ span {
   }
 
   .lose {
-    color: $col-red;
+    color: $color-red;
     font-weight: bold;
   }
 
   .error {
-    color: $col-red;
+    color: $color-red;
   }
 
   .win {
-    color: $col-green;
+    color: $color-green;
     font-weight: bold;
   }
 }
 
 form {
-  border: 1px solid $col-grey;
+  border: 1px solid $color-grey;
   margin: 4px;
 }
