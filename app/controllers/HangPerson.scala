@@ -38,9 +38,7 @@ class HangPerson @Inject()(ws: WSClient) extends Controller {
   def create = Action {
     val word: String = randomWord
     game = new HangPersonGame(word)
-    Redirect(routes.HangPerson.show()).withSession(
-      "word" -> word
-    )
+    Redirect(routes.HangPerson.show())
   }
 
   def show = Action {
