@@ -7,27 +7,23 @@ $color-red: #f00;
 $color-green: #008000;
 $color-grey: #808080;
 
+@mixin text($class, $extend) {
+  .text-#{$class} {
+    @extend .text-#{$extend};
+    font-size: larger;
+    font-weight: bold;
+    text-transform: uppercase;
+    @content
+  }
+}
+
 body {
   border: 8px solid $color-teal;
   font-family: Helvetica, Arial, Geneva, sans-serif;
   padding: 2em;
 }
 
-.text-guesses {
-  @extend .text-danger;
-  font-size: larger;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.text-word {
-  @extend .text-info;
-  font-size: larger;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-span.lose {
-  color: $color-red;
-  font-weight: bold;
-}
+@include text('guesses', 'danger')
+@include text('word', 'info')
+@include text('lose', 'danger')
+@include text('win', 'success')
