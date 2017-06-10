@@ -1,0 +1,9 @@
+@mixin text($class, $extend) {
+  .text-#{$class} {
+    @extend .text-#{$extend};
+    font-size: larger;
+    font-weight: bold;
+    text-transform: uppercase;
+    @content
+  }
+}

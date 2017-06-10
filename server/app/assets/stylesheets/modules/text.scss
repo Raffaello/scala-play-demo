@@ -1,0 +1,9 @@
+@import "lib/compass-mixins/lib/compass";
+@import "lib/bootstrap-sass/assets/stylesheets/bootstrap-compass";
+@import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../mixins/text";
+
+@include text('guesses', 'danger')
+@include text('word', 'info')
+@include text('lose', 'danger')
+@include text('win', 'success')

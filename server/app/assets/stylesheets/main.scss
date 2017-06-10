@@ -1,29 +1,8 @@
-@import "lib/compass-mixins/lib/compass";
-@import "lib/bootstrap-sass/assets/stylesheets/bootstrap-compass";
-@import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
-
-$color-teal: #008080;
-$color-red: #f00;
-$color-green: #008000;
-$color-grey: #808080;
-
-@mixin text($class, $extend) {
-  .text-#{$class} {
-    @extend .text-#{$extend};
-    font-size: larger;
-    font-weight: bold;
-    text-transform: uppercase;
-    @content
-  }
-}
+@import 'variables/colors';
+@import 'modules/text';
 
 body {
-  border: 8px solid $color-teal;
+  border: 8px solid $color-body-border;
   font-family: Helvetica, Arial, Geneva, sans-serif;
   padding: 2em;
 }
-
-@include text('guesses', 'danger')
-@include text('word', 'info')
-@include text('lose', 'danger')
-@include text('win', 'success')
