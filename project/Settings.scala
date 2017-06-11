@@ -24,7 +24,6 @@ object Settings {
     val scala = "2.11.11"
     val scalaDom = "0.9.1"
     val scalajsReact = "0.11.3"
-    //    val scalaCSS = "0.5.0"
     //    val log4js = "1.4.10"
     //    val autowire = "0.2.5"
     //    val booPickle = "1.2.5"
@@ -35,7 +34,6 @@ object Settings {
     val bootstrap = "3.3.7"
     val compass = "1.0.2"
     val fontawesome = "4.3.0-1"
-    //    val chartjs = "2.1.3"
     val scalajsScripts = "1.0.0"
   }
 
@@ -51,12 +49,10 @@ object Settings {
   /** Dependencies only used by the JVM project */
   val playDependencies = Def.setting(Seq(
     "com.vmunier" %% "scalajs-scripts" % versions.scalajsScripts,
-
     "org.webjars" % "font-awesome" % versions.fontawesome % Provided,
     "org.webjars.bower" % "bootstrap-sass" % versions.bootstrap % Provided,
     "org.webjars.bower" % "compass-mixins" % versions.compass % Provided,
     //    "com.lihaoyi" %% "utest" % versions.uTest % Test
-    //    jdbc,
     cache,
     ws,
     specs2 % Test
@@ -66,7 +62,6 @@ object Settings {
   val scalajsDependencies = Def.setting(Seq(
         "com.github.japgolly.scalajs-react" %%% "core" % versions.scalajsReact,
         "com.github.japgolly.scalajs-react" %%% "extra" % versions.scalajsReact,
-//        "com.github.japgolly.scalacss" %%% "ext-react" % versions.scalaCSS,
     //    "me.chrons" %%% "diode" % versions.diode,
     //    "me.chrons" %%% "diode-react" % versions.diode,
         "org.scala-js" %%% "scalajs-dom" % versions.scalaDom //,
@@ -81,15 +76,6 @@ object Settings {
 
         "org.webjars" % "jquery" % versions.jQuery / "jquery.js" minified "jquery.min.js",
         "org.webjars" % "bootstrap-sass" % versions.bootstrap / "bootstrap.js" minified "bootstrap.min.js" dependsOn "jquery.js"
-    //    "org.webjars" % "chartjs" % versions.chartjs / "Chart.js" minified "Chart.min.js",
     //    "org.webjars" % "log4javascript" % versions.log4js / "js/log4javascript_uncompressed.js" minified "js/log4javascript.js"
   ))
-
-  val npmDependencies: Seq[(String, String)] = Seq[(String, String)](
-
-  )
-
-  val npmDevDependencies: Seq[(String, String)] = Seq[(String, String)](
-
-  )
 }
