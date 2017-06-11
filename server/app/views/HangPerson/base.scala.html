@@ -19,7 +19,7 @@
             <div class="panel panel-default">
                 <div>
                     @if(flash.get("error").isDefined) {
-                        @alerts_macro("error", flash.get("error").getOrElse(""))
+                        @alerts_macro("error", flash("error"))
                     }
                 </div>
                 @content

@@ -16,11 +16,6 @@
             <span class="text-word">@game_word_with_guesses</span>
         </p>
 
-        @*<form class="form-inline" action=@routes.HangPerson.guess method="post">*@
-        @*<label for="guess">Guess a letter</label>*@
-        @*<input type="text" class="form-control" size="1" class="form-control" id="guess" name="guess" autocomplete="off" required placeholder="?">*@
-        @*<input type="submit" value="Guess!"/>*@
-        @*</form>*@
         @if(hangPersonForm.hasGlobalErrors) {
             <ul>
             @for(error <- hangPersonForm.globalErrors) {
