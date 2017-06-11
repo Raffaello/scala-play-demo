@@ -1,8 +1,11 @@
 package controllers
 
+import forms.HangPersonForm
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
+import play.api.i18n.{DefaultMessagesApi, Messages, MessagesApi}
+import play.api.mvc.Flash
 import play.api.test.Helpers._
 import play.api.test._
 
@@ -15,7 +18,6 @@ class HangPersonSpec extends Specification
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome("/hangperson/new")
     }
-
 
     "GET 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
       val Some(response) = route(app, FakeRequest(GET, "/hangperson/create"))
@@ -35,16 +37,6 @@ class HangPersonSpec extends Specification
       redirectLocation(response) must beSome("/hangperson/new")
     }
 
-    "GET 'hangperson/show' after POST '/hangpreson/create'" in new WithApplication {
-      "POST 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
-        val Some(response) = route(app, FakeRequest(POST, "/hangperson/create"))
-        status(response) must equalTo(SEE_OTHER)
-        redirectLocation(response) must beSome("/hangperson/show")
-      }
-      val Some(response2) = route(app, FakeRequest(GET, "/hangperson/show").withSession(("word", "test")))
-      status(response2) must equalTo(OK)
-    }
-
     "work from within a browser" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson")
       browser.pageSource must contain("Hangperson")
@@ -53,6 +45,21 @@ class HangPersonSpec extends Specification
     "work from within a browser SPA" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson/spa")
       browser.pageSource must contain("Hang Person SPA")
+    }
+
+    "work from a browser click new game and go to show page" in new WithBrowser {
+      browser.goTo("http://localhost:" + port + "/hangperson/new")
+      browser.pageSource must contain("New Game")
+      browser.click("input[id='newgame']")
+      browser.url() must contain("/show")
+      println(browser.url())
+    }
+  }
+
+  // these are useless test, but just for learning...
+  "HangPerson VIEWS" should {
+    "render new" in new WithApplication {
+      contentAsString(views.html.HangPerson.newAction()) must contain("New Game")
     }
   }
 }
