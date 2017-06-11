@@ -1,10 +1,8 @@
 package controllers
 
-import forms.HangPersonForm
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
-import play.api.i18n.{DefaultMessagesApi, Messages, MessagesApi}
 import play.api.mvc.Flash
 import play.api.test.Helpers._
 import play.api.test._
@@ -37,6 +35,18 @@ class HangPersonSpec extends Specification
       redirectLocation(response) must beSome("/hangperson/new")
     }
 
+    "GET 'hangperson/win redirect to 'hangperson/new'" in new WithApplication {
+      val Some(response) = route(app, FakeRequest(GET, "/hangperson/win"))
+      status(response) must equalTo(SEE_OTHER)
+      redirectLocation(response) must beSome("/hangperson/new")
+    }
+
+    "GET 'hangperson/lose redirect to 'hangperson/new'" in new WithApplication {
+      val Some(response) = route(app, FakeRequest(GET, "/hangperson/lose"))
+      status(response) must equalTo(SEE_OTHER)
+      redirectLocation(response) must beSome("/hangperson/new")
+    }
+
     "work from within a browser" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson")
       browser.pageSource must contain("Hangperson")
@@ -59,7 +69,7 @@ class HangPersonSpec extends Specification
   // these are useless test, but just for learning...
   "HangPerson VIEWS" should {
     "render new" in new WithApplication {
-      contentAsString(views.html.HangPerson.newAction()) must contain("New Game")
+      contentAsString(views.html.HangPerson.newAction()(new Flash())) must contain("New Game")
     }
   }
 }

@@ -64,38 +64,37 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, ws: WSClient) extends C
 
   def win = Action {
     implicit request => {
-      game.checkWinOrLose match {
-        case Some(true) => Ok(views.html.HangPerson.win(game.word))
-        case _ => Redirect(routes.HangPerson.show())
+      if (null == game) {
+        Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
+      } else {
+        game.checkWinOrLose match {
+          case Some(true) => Ok(views.html.HangPerson.win(game.word))
+          case _ => Redirect(routes.HangPerson.show())
+        }
       }
     }
   }
 
   def lose = Action {
     implicit request => {
-      game.checkWinOrLose match {
-        case Some(false) => Ok(views.html.HangPerson.lose(game.word))
-        case _ => Redirect(routes.HangPerson.show())
+      if (null == game) {
+        Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
+      } else {
+        game.checkWinOrLose match {
+          case Some(false) => Ok(views.html.HangPerson.lose(game.word))
+          case _ => Redirect(routes.HangPerson.show())
+        }
       }
     }
   }
 
   def guess = Action {
-    //    request => {
-    //      val form = request.body
-    //      Logger.debug(form.letter.isLetter.toString)
-    //      Logger.debug(form.letter.toString)
-    //      Logger.debug(form.toString)
-    //      Redirect(routes.HangPerson.show())
-    //    }
     implicit request => {
-      Logger.debug(request.body.toString)
       if (null == game) {
         Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
       } else {
         HangPersonForm.HangPersonForm.bindFromRequest.fold(
           formWithErrors => {
-            Logger.debug("BadRequest: " + formWithErrors.toString)
             BadRequest(views.html.HangPerson.show(game.wrongGuesses, game.guesses, formWithErrors))
           },
           HangPersonData => {
@@ -115,19 +114,6 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, ws: WSClient) extends C
         )
       }
     }
-    //    request => {
-    //      val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
-    //      Logger.debug("c=" + c)
-    //      try {
-    //        if (game.guess(c))
-    //          Redirect(routes.HangPerson.show())
-    //        else
-    //          Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
-    //      } catch {
-    //        case e: IllegalArgumentException =>
-    //          Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
-    //      }
-    //    }
   }
 
   def spa = Action {
