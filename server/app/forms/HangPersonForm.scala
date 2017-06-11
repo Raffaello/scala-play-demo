@@ -7,7 +7,7 @@ object HangPersonForm {
 
   case class HangPersonData(letter: Char)
 
-  val HangPersonForm = Form[HangPersonData](
+  val HangPersonForm: Form[HangPersonData] = Form[HangPersonData](
     mapping(
       "letter" -> char
     )(HangPersonData.apply)(HangPersonData.unapply)

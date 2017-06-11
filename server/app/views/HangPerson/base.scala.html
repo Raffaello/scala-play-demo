@@ -1,4 +1,4 @@
-@(content: Html)
+@(content: Html)(implicit flash: Flash)
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,14 @@
                     <h1>Play Hangperson!</h1>
                 </div>
             </div>
-            <div class="panel panel-default">@content</div>
+            <div class="panel panel-default">
+                <div>
+                    @if(flash.get("error").isDefined) {
+                        @alerts_macro("error", flash.get("error").getOrElse(""))
+                    }
+                </div>
+                @content
+            </div>
         </div>
         <footer id="footer" class="span-24 text-muted">
             <p>Random word generator provided by Watchout4snakes.com -- thanks!</p>

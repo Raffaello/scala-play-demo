@@ -15,7 +15,7 @@ import forms.HangPersonForm
 import play.api.i18n.MessagesApi
 import play.api.i18n.I18nSupport
 
-class HangPerson @Inject() (val messagesApi: MessagesApi, ws: WSClient) extends Controller with I18nSupport {
+class HangPerson @Inject()(val messagesApi: MessagesApi, ws: WSClient) extends Controller with I18nSupport {
   var game: HangPersonGame = _
 
   def randomWord: String = {
@@ -37,7 +37,9 @@ class HangPerson @Inject() (val messagesApi: MessagesApi, ws: WSClient) extends 
   }
 
   def newAction = Action {
-    Ok(views.html.HangPerson.newAction())
+    implicit request => {
+      Ok(views.html.HangPerson.newAction())
+    }
   }
 
   def create = Action {
@@ -61,33 +63,71 @@ class HangPerson @Inject() (val messagesApi: MessagesApi, ws: WSClient) extends 
   }
 
   def win = Action {
-    game.checkWinOrLose match {
-      case Some(true) => Ok(views.html.HangPerson.win(game.word))
-      case _ => Redirect(routes.HangPerson.show())
+    implicit request => {
+      game.checkWinOrLose match {
+        case Some(true) => Ok(views.html.HangPerson.win(game.word))
+        case _ => Redirect(routes.HangPerson.show())
+      }
     }
   }
 
   def lose = Action {
-    game.checkWinOrLose match {
-      case Some(false) => Ok(views.html.HangPerson.lose(game.word))
-      case _ => Redirect(routes.HangPerson.show())
+    implicit request => {
+      game.checkWinOrLose match {
+        case Some(false) => Ok(views.html.HangPerson.lose(game.word))
+        case _ => Redirect(routes.HangPerson.show())
+      }
     }
   }
 
   def guess = Action {
-    request => {
-      val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
-      Logger.debug("c=" + c)
-      try {
-        if (game.guess(c))
-          Redirect(routes.HangPerson.show())
-        else
-          Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
-      } catch {
-        case e: IllegalArgumentException =>
-          Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
+    //    request => {
+    //      val form = request.body
+    //      Logger.debug(form.letter.isLetter.toString)
+    //      Logger.debug(form.letter.toString)
+    //      Logger.debug(form.toString)
+    //      Redirect(routes.HangPerson.show())
+    //    }
+    implicit request => {
+      Logger.debug(request.body.toString)
+      if (null == game) {
+        Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
+      } else {
+        HangPersonForm.HangPersonForm.bindFromRequest.fold(
+          formWithErrors => {
+            Logger.debug("BadRequest: " + formWithErrors.toString)
+            BadRequest(views.html.HangPerson.show(game.wrongGuesses, game.guesses, formWithErrors))
+          },
+          HangPersonData => {
+            val c = HangPersonData.letter
+            Logger.debug("c=" + c)
+            try {
+              if (game.guess(c)) {
+                Redirect(routes.HangPerson.show())
+              } else {
+                Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+              }
+            } catch {
+              case e: IllegalArgumentException =>
+                Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
+            }
+          }
+        )
       }
     }
+    //    request => {
+    //      val c = request.body.asFormUrlEncoded.get("guess").toArray.head.head
+    //      Logger.debug("c=" + c)
+    //      try {
+    //        if (game.guess(c))
+    //          Redirect(routes.HangPerson.show())
+    //        else
+    //          Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+    //      } catch {
+    //        case e: IllegalArgumentException =>
+    //          Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
+    //      }
+    //    }
   }
 
   def spa = Action {
