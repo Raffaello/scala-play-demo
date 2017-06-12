@@ -1,5 +1,6 @@
 package controllers
 
+import java.util.UUID
 import javax.inject.Inject
 
 import helpers.HangPersonGame
@@ -7,23 +8,36 @@ import play.api.mvc._
 import play.api.Logger
 import play.api.libs.ws.WSClient
 import forms.HangPersonForm
+import play.api.cache.CacheApi
 import play.api.i18n.{I18nSupport, MessagesApi}
+
 import scala.concurrent.Future
 
-class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient) extends Controller
+class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache: CacheApi) extends Controller
   with I18nSupport with RandomWordClient {
+  val sessionKey = "UUID"
   var game: HangPersonGame = _
 
   def GameAction[A](action: Action[A]): Action[A] = Action.async(action.parser) {
-    if (null == game) {
-      _ => {
+    request => {
+      val uuid = request.session.get(sessionKey)
+      if (uuid.isEmpty) {
         Future.successful(
           Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
         )
-      }
-    } else {
-      request => {
-        action(request)
+      } else {
+        val maybeGame: Option[HangPersonGame] = cache.get[HangPersonGame](uuid.get)
+        maybeGame match {
+          case None => {
+            Future.successful(
+              Redirect(routes.HangPerson.newAction())
+                .flashing("error" -> "Game was not found!"))
+          }
+          case _ => {
+            game = maybeGame.get
+            action(request)
+          }
+        }
       }
     }
   }
@@ -35,8 +49,12 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient) exten
   }
 
   def create = Action {
-    game = new HangPersonGame(randomWord)
-    Redirect(routes.HangPerson.show())
+    request => {
+      val uuid = request.session.get(sessionKey).getOrElse(UUID.randomUUID().toString)
+      game = new HangPersonGame(randomWord)
+      cache.set(uuid, game)
+      Redirect(routes.HangPerson.show()).withSession((sessionKey, uuid))
+    }
   }
 
   def show = GameAction(Action {
