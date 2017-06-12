@@ -10,6 +10,9 @@ import play.api.test._
 @RunWith(classOf[JUnitRunner])
 class HangPersonSpec extends Specification
 {
+  // Set sequential execution
+  sequential
+
   "HangPerson" should  {
     "/hangperson redirect to 'hangperson/new'" in new WithApplication {
       val Some(response) = route(app, FakeRequest(GET, "/hangperson"))

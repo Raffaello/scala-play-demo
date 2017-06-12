@@ -13,6 +13,8 @@ class HangPersonGameSpec extends Specification
   def guess_several_letters(game: HangPersonGame, letters: String) = {
       letters.toCharArray.foreach(c => game.guess(c))
   }
+  // Set sequential execution
+  sequential
 
   "HangPersonGame" should {
     "create new object" in new WithApplication {

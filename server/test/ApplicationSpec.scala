@@ -11,6 +11,9 @@ import play.api.test.Helpers._
   */
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
+  // Set sequential execution
+  sequential
+
   "Application" should {
     "send 404 on a bad request" in new WithApplication() {
       route(app, FakeRequest(GET, "/boum")) must beSome.which(status(_) == NOT_FOUND)
