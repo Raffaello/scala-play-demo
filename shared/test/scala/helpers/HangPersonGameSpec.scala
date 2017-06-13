@@ -1,5 +1,6 @@
 package helpers
 
+import main.scala.helpers.HangPersonGame
 import org.junit
 import org.junit.runner._
 import org.specs2.mutable._
