@@ -1,4 +1,4 @@
-## Scala Play! simple Hangouts game
+## Scala Play! simple HangMan Game
 
 [![Build Status](https://travis-ci.org/Raffaello/scala-play-demo.svg?branch=master)](https://travis-ci.org/Raffaello/scala-play-demo)
 [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.17.svg)](https://www.scala-js.org)
