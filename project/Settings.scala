@@ -23,13 +23,13 @@ object Settings {
   object versions {
     val scala = "2.11.11"
     val scalaDom = "0.9.1"
-    val scalajsReact = "0.11.3"
+    val scalajsReact = "1.0.1"
     //    val log4js = "1.4.10"
     //    val autowire = "0.2.5"
     //    val booPickle = "1.2.5"
     //    val diode = "1.1.0"
     //    val uTest = "0.4.4"
-    val react = "15.3.2"
+    val react = "15.3.2" // 15.5.4 // 15.6.0
     val jQuery = "3.2.1"
     val bootstrap = "3.3.7"
     val compass = "1.0.2"
@@ -78,4 +78,11 @@ object Settings {
         "org.webjars" % "bootstrap-sass" % versions.bootstrap / "bootstrap.js" minified "bootstrap.min.js" dependsOn "jquery.js"
     //    "org.webjars" % "log4javascript" % versions.log4js / "js/log4javascript_uncompressed.js" minified "js/log4javascript.js"
   ))
+
+  // @todo scalajsbundler need to be fixed do it later
+  val npmDependencies = Seq(
+    "react" -> versions.react,
+    "react-dom" -> versions.react,
+    "react-dom-server" -> versions.react
+  )
 }
