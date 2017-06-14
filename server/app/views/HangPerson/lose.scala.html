@@ -1,0 +1,11 @@
+@(game_word: String)(implicit flash: Flash)
+@base {
+    <h1>Sorry, you lose!</h1>
+
+    <p>
+        The word was
+        <span class="text-lose">@game_word</span>
+    </p>
+
+    @newActionSnippet()
+}

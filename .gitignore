@@ -9,3 +9,7 @@ target
 /.sbtserver
 project/.sbtserver
 project/.sbtserver.lock
+*.iml
+# hidden cross project folders
+shared/.js
+shared/.jvm

@@ -1,0 +1,42 @@
+@import forms.HangPersonForm.HangPersonData
+@import helper._
+@import play.api.templates.PlayMagic.toHtmlArgs
+
+@(game_wrong_guesses: String, game_word_with_guesses: String, hangPersonForm: Form[HangPersonData])(implicit messages: Messages, flash: Flash)
+
+@base {
+    <div class="panel-body">
+        <h2>Guess a letter</h2>
+        <p>
+            Wrong Guesses:
+            <span class="text-guesses">@game_wrong_guesses</span>
+        </p>
+        <p>
+            Word so far:
+            <span class="text-word">@game_word_with_guesses</span>
+        </p>
+
+        @if(hangPersonForm.hasGlobalErrors) {
+            <ul>
+            @for(error <- hangPersonForm.globalErrors) {
+                <li class="alert-danger">@Messages(error.messages, error.args)</li>
+            }
+            </ul>
+        }
+
+        @form(action = routes.HangPerson.guess, 'class -> "form-inline", 'method -> "post") {
+            @helper.input(hangPersonForm("letter"),
+                'class -> "form-control", 'size -> 1, 'maxlength -> "1",
+                'autocomplete -> "off", 'placeholder -> "?",
+                'pattern -> "[A-Za-z]{1}", 'title -> "just one letter",
+                '_label -> null, '_showErrors -> true
+            ) { (id, name, value, args) =>
+                <label for="@{id}">Guess a letter</label>
+                <input type="text" autofocus name="@{name}" id="@{id}" @{toHtmlArgs(args)}>
+                <input class="btn btn-default" type="submit" value="Guess!"/>
+            }
+        }
+    </div>
+
+    @newActionSnippet()
+}

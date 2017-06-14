@@ -1,0 +1,8 @@
+@import 'variables/colors';
+@import 'modules/text';
+
+body {
+  border: 8px solid $color-body-border;
+  font-family: Helvetica, Arial, Geneva, sans-serif;
+  padding: 2em;
+}
