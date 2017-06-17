@@ -12,4 +12,4 @@ addSbtPlugin("com.vmunier" % "sbt-web-scalajs" % "1.0.4")
 addSbtPlugin("com.typesafe.sbt" % "sbt-digest" % "1.1.1")
 addSbtPlugin("com.typesafe.sbt" % "sbt-gzip" % "1.0.0")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.3")
-
+addSbtPlugin("com.updateimpact" % "updateimpact-sbt-plugin" % "2.1.2")
