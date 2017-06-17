@@ -15,8 +15,8 @@ cache:
     - '$HOME/.sbt/boot/'
 
 script:
-    - sbt clean coverage test coverageReport
-#    - sbt coverageReport
+    - sbt clean coverage test
+    - sbt coverageReport
     - sbt coverageAggregate
     - sbt codacyCoverage
 
