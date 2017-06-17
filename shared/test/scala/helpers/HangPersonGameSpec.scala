@@ -11,7 +11,7 @@ import play.api.test._
 @RunWith(classOf[JUnitRunner])
 class HangPersonGameSpec extends Specification
 {
-  def guess_several_letters(game: HangPersonGame, letters: String) = {
+  def guessSeveralLetters(game: HangPersonGame, letters: String) = {
       letters.toCharArray.foreach(c => game.guess(c))
   }
   // Set sequential execution
@@ -44,7 +44,7 @@ class HangPersonGameSpec extends Specification
 
     "Several letter" in new WithApplication() {
       val game = new HangPersonGame("garply")
-      guess_several_letters(game, "aq")
+      guessSeveralLetters(game, "aq")
       game.guesses must beEqualTo("a")
       game.wrongGuesses must beEqualTo("q")
 
@@ -68,33 +68,34 @@ class HangPersonGameSpec extends Specification
     }
 
     "displayed word with guesses" in new WithApplication() {
+      val banana = "banana"
       Map(
         "bn"  ->  "b-n-n-",
         "def" -> "------",
-        "ban" -> "banana"
+        "ban" -> banana
       ).foreach(t => {
-        val game = new HangPersonGame("banana")
-        guess_several_letters(game, t._1)
+        val game = new HangPersonGame(banana)
+        guessSeveralLetters(game, t._1)
         game.wordWithGuesses must beEqualTo(t._2)
       })
     }
 
     "game status win" in new WithApplication {
       val game: HangPersonGame = new HangPersonGame("dog")
-      guess_several_letters(game, "ogd")
+      guessSeveralLetters(game, "ogd")
       game.checkWinOrLose must beEqualTo(Some(true))
     }
 
     "game status lose" in new WithApplication {
       val game: HangPersonGame = new HangPersonGame("dog")
       game.guesses must beEqualTo("")
-      guess_several_letters(game, "tuvwxyzdog")
+      guessSeveralLetters(game, "tuvwxyzdog")
       game.checkWinOrLose must beEqualTo(Some(false))
     }
 
     "game status play" in new WithApplication {
       val game: HangPersonGame = new HangPersonGame("dog")
-      guess_several_letters(game, "dac")
+      guessSeveralLetters(game, "dac")
       game.checkWinOrLose must beEqualTo(None)
     }
   }

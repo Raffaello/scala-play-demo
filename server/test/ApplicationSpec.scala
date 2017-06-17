@@ -18,21 +18,22 @@ class ApplicationSpec extends PlaySpecification {
     }
 
     "render the index page" in new WithApplication {
-      val home = route(app, FakeRequest(GET, "/")).get
+      val Some(home) = route(app, FakeRequest(GET, "/"))
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
       contentAsString(home) must contain("Your new application is ready.")
     }
 
+    val baseUri = "http://localhost:"
     "click on HangMan redirect to /newgame" in new WithBrowser {
-      browser.goTo("http://localhost:" + port)
+      browser.goTo(baseUri + port)
       browser.pageSource must contain("HangMan Game")
       browser.click("a[id='hangman']")
       browser.url() must contain("/new")
     }
 
     "click on HangMan redirect to /spa" in new WithBrowser {
-      browser.goTo("http://localhost:" + port)
+      browser.goTo(baseUri + port)
       browser.pageSource must contain("HangMan Game SPA")
       browser.click("a[id='hangman-spa']")
       browser.url() must contain("/hangperson/spa")

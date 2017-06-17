@@ -18,7 +18,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
   val sessionKey = "UUID"
   var game: HangPersonGame = _
 
-  def GameAction[A](action: Action[A]): Action[A] = Action.async(action.parser) {
+  def gameAction[A](action: Action[A]): Action[A] = Action.async(action.parser) {
     request => {
       val uuid = request.session.get(sessionKey)
       if (uuid.isEmpty) {
@@ -57,7 +57,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
     }
   }
 
-  def show = GameAction(Action {
+  def show = gameAction(Action {
     implicit request => {
       game.checkWinOrLose match {
         case Some(true) => Redirect(routes.HangPerson.win())
@@ -67,7 +67,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
     }
   })
 
-  def win = GameAction(Action {
+  def win = gameAction(Action {
     implicit request => {
       game.checkWinOrLose match {
         case Some(true) => Ok(views.html.HangPerson.win(game.word))
@@ -76,7 +76,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
     }
   })
 
-  def lose = GameAction(Action {
+  def lose = gameAction(Action {
     implicit request => {
       game.checkWinOrLose match {
         case Some(false) => Ok(views.html.HangPerson.lose(game.word))
@@ -85,7 +85,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
     }
   })
 
-  def guess = GameAction(Action {
+  def guess = gameAction(Action {
     implicit request => {
       HangPersonForm.HangPersonForm.bindFromRequest.fold(
         formWithErrors => {
