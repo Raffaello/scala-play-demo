@@ -1,11 +1,10 @@
 @(game_word: String)(implicit flash: Flash)
-@base {
+@views.html.HangPerson.base {
     <h1>You Win!</h1>
-
     <p>
         The word was
         <span class="text-win">@game_word</span>.
     </p>
 
-    @newActionSnippet()
+    @views.html.HangPerson.newActionSnippet()
 }

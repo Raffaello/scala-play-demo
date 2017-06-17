@@ -23,7 +23,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
       val uuid = request.session.get(sessionKey)
       if (uuid.isEmpty) {
         Future.successful(
-          Redirect(routes.HangPerson.newAction()).flashing("error" -> "Game was not created!")
+          Redirect(routes.HangPerson.newAction()).flashing("danger" -> "Game was not created!")
         )
       } else {
         val maybeGame: Option[HangPersonGame] = cache.get[HangPersonGame](uuid.get)
@@ -31,7 +31,7 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
           case None => {
             Future.successful(
               Redirect(routes.HangPerson.newAction())
-                .flashing("error" -> "Game was not found!"))
+                .flashing("danger" -> "Game was not found!"))
           }
           case _ => {
             game = maybeGame.get
@@ -97,11 +97,11 @@ class HangPerson @Inject()(val messagesApi: MessagesApi, val ws: WSClient, cache
             if (game.guess(HangPersonData.letter)) {
               Redirect(routes.HangPerson.show())
             } else {
-              Redirect(routes.HangPerson.show()).flashing("error" -> "You have already used that letter.")
+              Redirect(routes.HangPerson.show()).flashing("danger" -> "You have already used that letter.")
             }
           } catch {
             case e: IllegalArgumentException =>
-              Redirect(routes.HangPerson.show()).flashing("error" -> e.getMessage)
+              Redirect(routes.HangPerson.show()).flashing("danger" -> e.getMessage)
           }
         }
       )

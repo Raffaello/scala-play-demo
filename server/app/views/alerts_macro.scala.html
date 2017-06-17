@@ -1,32 +1,12 @@
 @(level: String, message: String)
 
-@level match {
-    case "success" => {
-        <div class="alert alert-success">
-            <strong>Success!</strong>
-            @message
-        </div>
+<div class="alert alert-@{level}" data-dismiss="alert">
+    <strong>
+    @if("danger" == level) {
+        Error!
+    } else {
+        @{level.toString.capitalize}!
     }
-
-    case "info" => {
-        <div class="alert alert-info">
-            <strong>Info!</strong>
-            @message
-        </div>
-    }
-    case "warning" => {
-        <div class="alert alert-warning">
-            <strong>Warning!</strong>
-            @message
-        </div>
-    }
-    case "danger" => {
-        <div class="alert alert-danger">
-            <strong>Error!</strong>
-            @message
-        </div>
-    }
-    case "error" => {
-        @this("danger", message)
-    }
-}
+    </strong>
+    @message
+</div>

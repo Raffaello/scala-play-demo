@@ -18,8 +18,10 @@
             </div>
             <div class="panel panel-default">
                 <div>
-                    @if(flash.get("error").isDefined) {
-                        @alerts_macro("error", flash("error"))
+                    @if(!flash.isEmpty) {
+                        @for((k,v) <- flash.data) {
+                            @alerts_macro(k, v)
+                        }
                     }
                 </div>
                 @content

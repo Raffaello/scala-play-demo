@@ -8,7 +8,7 @@ import play.api.test.Helpers._
 import play.api.test._
 
 @RunWith(classOf[JUnitRunner])
-class HangPersonSpec extends Specification
+class HangPersonSpec extends PlaySpecification
 {
   // Set sequential execution
   sequential
@@ -55,24 +55,18 @@ class HangPersonSpec extends Specification
       browser.pageSource must contain("Hangperson")
     }
 
-    "work from within a browser SPA" in new WithBrowser {
-      browser.goTo("http://localhost:" + port + "/hangperson/spa")
-      browser.pageSource must contain("Hang Person SPA")
-    }
-
     "work from a browser click new game and go to show page" in new WithBrowser {
       browser.goTo("http://localhost:" + port + "/hangperson/new")
       browser.pageSource must contain("New Game")
       browser.click("input[id='newgame']")
       browser.url() must contain("/show")
-      println(browser.url())
     }
   }
 
   // these are useless test, but just for learning...
   "HangPerson VIEWS" should {
     "render new" in new WithApplication {
-      contentAsString(views.html.HangPerson.newAction()(new Flash())) must contain("New Game")
+      contentAsString(views.html.HangPerson.newAction()(new Flash(Map("success" -> "test")))) must contain("Success!")
     }
   }
 }

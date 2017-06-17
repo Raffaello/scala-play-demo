@@ -1,5 +1,9 @@
 @(message: String)
 
 @main("Welcome to Play") {
+    <div class="btn-group">
+        <a id="hangman" class="btn btn-primary" href="@routes.HangPerson.newAction()">Go to HangMan Game</a>
+        <a id="hangman-spa" class="btn btn-primary" href="@routes.HangPersonSpa.index()">Go to HangMan Game SPA</a>
+    </div>
     @play20.welcome(message)
 }
