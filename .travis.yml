@@ -13,3 +13,6 @@ cache:
   directories:
     - '$HOME/.ivy2/cache'
     - '$HOME/.sbt/boot/'
+
+after_success:
+  - UPDATEIMPACT_API_KEY="zYy2GeIf9Gcm9JuT7dvcutEzZhkxJgNL" sbt updateImpactSubmit
