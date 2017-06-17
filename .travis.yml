@@ -22,3 +22,4 @@ script:
 
 after_success:
 - bash <(curl -s https://codecov.io/bash) -t 7a8a8a42-bf1a-4dcd-b558-b571ee7b25a0
+- sbt coveralls
