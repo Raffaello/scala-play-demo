@@ -4,7 +4,7 @@
 
 @(game_wrong_guesses: String, game_word_with_guesses: String, hangPersonForm: Form[HangPersonData])(implicit messages: Messages, flash: Flash)
 
-@base {
+@views.html.HangPerson.base {
     <div class="panel-body">
         <h2>Guess a letter</h2>
         <p>
@@ -38,5 +38,5 @@
         }
     </div>
 
-    @newActionSnippet()
+    @views.html.HangPerson.newActionSnippet()
 }

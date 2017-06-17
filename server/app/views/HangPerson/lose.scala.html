@@ -1,5 +1,5 @@
 @(game_word: String)(implicit flash: Flash)
-@base {
+@views.html.HangPerson.base {
     <h1>Sorry, you lose!</h1>
 
     <p>
@@ -7,5 +7,5 @@
         <span class="text-lose">@game_word</span>
     </p>
 
-    @newActionSnippet()
+    @views.html.HangPerson.newActionSnippet()
 }
