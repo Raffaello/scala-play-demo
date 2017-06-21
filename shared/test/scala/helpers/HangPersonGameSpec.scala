@@ -11,7 +11,7 @@ import play.api.test._
 @RunWith(classOf[JUnitRunner])
 class HangPersonGameSpec extends Specification
 {
-  def guessSeveralLetters(game: HangPersonGame, letters: String): Unit = {
+  def guessSeveralLetters(game: HangPersonGame, letters: String) = {
       letters.toCharArray.foreach(c => game.guess(c))
   }
   // Set sequential execution
