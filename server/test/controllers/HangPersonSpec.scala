@@ -14,7 +14,11 @@ class HangPersonSpec extends PlaySpecification
   "HangPerson" should  {
     val uri = "/hangperson"
     val uriNew = uri + "/new"
+    val show = "/show"
+    val uriShow = uri + show
     val uriCreate = uri + "/create"
+    val localhost = "http://localhost:"
+
     "/hangperson redirect to 'hangperson/new'" in new WithApplication {
       val Some(response) = route(app, FakeRequest(GET, uri))
       status(response) must equalTo(SEE_OTHER)
@@ -24,17 +28,17 @@ class HangPersonSpec extends PlaySpecification
     "GET 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
       val Some(response) = route(app, FakeRequest(GET, uriCreate))
       status(response) must equalTo(SEE_OTHER)
-      redirectLocation(response) must beSome(uri + "/show")
+      redirectLocation(response) must beSome(uriShow)
     }
 
     "POST 'hangperson/create' redirect to 'hangperson/show' " in new WithApplication {
       val Some(response) = route(app, FakeRequest(POST, uriCreate))
       status(response) must equalTo(SEE_OTHER)
-      redirectLocation(response) must beSome(uri + "/show")
+      redirectLocation(response) must beSome(uriShow)
     }
 
     "GET 'hangperson/show' redirect to 'hangperson/new' " in new WithApplication {
-      val Some(response) = route(app, FakeRequest(GET, uri + "/show"))
+      val Some(response) = route(app, FakeRequest(GET, uriShow))
       status(response) must equalTo(SEE_OTHER)
       redirectLocation(response) must beSome(uriNew)
     }
@@ -52,15 +56,15 @@ class HangPersonSpec extends PlaySpecification
     }
 
     "work from within a browser" in new WithBrowser {
-      browser.goTo("http://localhost:" + port + uri)
+      browser.goTo(localhost + port + uri)
       browser.pageSource must contain("Hangperson")
     }
 
     "work from a browser click new game and go to show page" in new WithBrowser {
-      browser.goTo("http://localhost:" + port + uriNew)
+      browser.goTo(localhost + port + uriNew)
       browser.pageSource must contain("New Game")
       browser.click("input[id='newgame']")
-      browser.url() must contain("/show")
+      browser.url() must contain(show)
     }
   }
 
