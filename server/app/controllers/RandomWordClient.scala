@@ -12,8 +12,8 @@ trait RandomWordClient {
   val ws: WSClient
 
   def randomWord: String = {
-    val URL = "http://watchout4snakes.com/wo4snakes/Random/RandomWord"
-    val word = Await.result[String](ws.url(URL).post(Map("LastWord" -> Seq(""))).map {
+    val url = "http://watchout4snakes.com/wo4snakes/Random/RandomWord"
+    val word = Await.result[String](ws.url(url).post(Map("LastWord" -> Seq(""))).map {
       response => {
         response.body
       }
