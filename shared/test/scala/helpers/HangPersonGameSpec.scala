@@ -17,20 +17,17 @@ class HangPersonGameSpec extends Specification
   // Set sequential execution
   sequential
 
-  val garply = "garply"
-  val test = "test"
-
   "HangPersonGame" should {
     "create new object" in new WithApplication {
-      val hangpersonGame = new HangPersonGame(test)
+      val hangpersonGame = new HangPersonGame("test")
       hangpersonGame must beAnInstanceOf[HangPersonGame]
-      hangpersonGame.word must beEqualTo(test)
+      hangpersonGame.word must beEqualTo("test")
       hangpersonGame.guesses must beEqualTo("")
       hangpersonGame.wrongGuesses must beEqualTo("")
     }
 
     "guessing correctly" in new WithApplication() {
-      val game = new HangPersonGame(garply)
+      val game = new HangPersonGame("garply")
       val valid = game.guess('a')
       game.guesses must beEqualTo("a")
       game.wrongGuesses must beEqualTo("")
@@ -38,7 +35,7 @@ class HangPersonGameSpec extends Specification
     }
 
     "guessing wrongly" in new WithApplication() {
-      val game = new HangPersonGame(garply)
+      val game = new HangPersonGame("garply")
       val valid = game.guess('z')
       game.guesses must beEqualTo("")
       game.wrongGuesses must beEqualTo("z")
@@ -46,7 +43,7 @@ class HangPersonGameSpec extends Specification
     }
 
     "Several letter" in new WithApplication() {
-      val game = new HangPersonGame(garply)
+      val game = new HangPersonGame("garply")
       guessSeveralLetters(game, "aq")
       game.guesses must beEqualTo("a")
       game.wrongGuesses must beEqualTo("q")
