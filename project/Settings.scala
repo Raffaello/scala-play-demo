@@ -45,6 +45,8 @@ object Settings {
     val compass = "1.0.2"
     val fontawesome = "4.3.0-1"
     val scalajsScripts = "1.0.0"
+    val scalaz = "7.2.13"
+    val scalazSpecs2 = "0.3.0"
   }
 
   /**
@@ -65,7 +67,9 @@ object Settings {
     //    "com.lihaoyi" %% "utest" % versions.uTest % Test
     cache,
     ws,
-    specs2 % Test
+    specs2 % Test,
+    "org.scalaz" %% "scalaz-core" % Versions.scalaz % Test,
+    "org.typelevel" %% "scalaz-specs2" % Versions.scalazSpecs2 % Test
   ))
 
   /** Dependencies only used by the JS project (note the use of %%% instead of %%) */
