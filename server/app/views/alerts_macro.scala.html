@@ -1,6 +1,7 @@
 @(level: String, message: String)
 
-<div class="alert alert-@{level}" data-dismiss="alert">
+<div class="alert alert-@{level} alert-dismissable" data-dismiss="alert" fade in>
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>
     @if("danger" == level) {
         Error!
