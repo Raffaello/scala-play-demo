@@ -29,11 +29,13 @@
                 'class -> "form-control", 'size -> 1, 'maxlength -> "1",
                 'autocomplete -> "off", 'placeholder -> "?",
                 'pattern -> "[A-Za-z]{1}", 'title -> "just one letter",
-                '_label -> null, '_showErrors -> true
+                '_label -> null, '_showErrors -> false
             ) { (id, name, value, args) =>
-                <label for="@{id}">Guess a letter</label>
-                <input type="text" autofocus name="@{name}" id="@{id}" @{toHtmlArgs(args)}>
-                <input class="btn btn-default" type="submit" value="Guess!"/>
+                <div class="form-group@{if(hangPersonForm.hasErrors) " has-error"}">
+                    <label for="@{id}" class="control-label">Guess a letter</label>
+                    <input type="text" required autofocus name="@{name}" id="@{id}" @{toHtmlArgs(args)}>
+                    <input class="btn btn-default" type="submit" value="Guess!"/>
+                </div>
             }
         }
     </div>

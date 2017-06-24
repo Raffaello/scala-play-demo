@@ -21,5 +21,6 @@ script:
     - sbt codacyCoverage
 
 after_success:
+- UPDATEIMPACT_API_KEY="zYy2GeIf9Gcm9JuT7dvcutEzZhkxJgNL" sbt updateImpactSubmit
 - bash <(curl -s https://codecov.io/bash) -t 7a8a8a42-bf1a-4dcd-b558-b571ee7b25a0
 - sbt coveralls

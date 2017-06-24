@@ -4,7 +4,7 @@ import sbt.Project.projectToRef
 // a special crossProject for configuring a JS/JVM/shared structure
 lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared"))
   .settings(
-    scalaVersion := Settings.versions.scala,
+    scalaVersion := Settings.Versions.scala,
     libraryDependencies ++= Settings.sharedDependencies.value
   )
   // set up settings specific to the JS project
@@ -21,7 +21,7 @@ lazy val client: Project = (project in file("client"))
     scalaJSUseMainModuleInitializer := true,
     name := "client",
     version := Settings.version,
-    scalaVersion := Settings.versions.scala,
+    scalaVersion := Settings.Versions.scala,
     scalacOptions ++= Settings.scalacOptions,
     libraryDependencies ++= Settings.scalajsDependencies.value,
     // by default we do development build, no eliding
@@ -47,7 +47,7 @@ lazy val server = (project in file("server"))
   .settings(
     name := "server",
     version := Settings.version,
-    scalaVersion := Settings.versions.scala,
+    scalaVersion := Settings.Versions.scala,
     scalacOptions ++= Settings.scalacOptions,
     libraryDependencies ++= Settings.playDependencies.value,
     commands += ReleaseCmd,
