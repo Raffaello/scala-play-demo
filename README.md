@@ -21,9 +21,9 @@
 
 - store UUID in session/cookie for multiple users
 and store the state of the game assoicate to the UUID in the cache
-- restore from cache the game state based on UUID retrieve from session
+- restore from cache the game state based on UUID retrieve from the session
 
 ### HangPerson Game SPA
 
-- it download the compiled scalaJS (javascript) built in ReactJS
-and the game will be generate in browser (off-line). The Server is no more required at this point.
+- it download the compiled scalaJS (javascript) built with ReactJS
+and the game will be generate in browser (off-line). The Server is no more required at this point except from the random word.
