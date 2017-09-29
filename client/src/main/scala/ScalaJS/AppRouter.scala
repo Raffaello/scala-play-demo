@@ -1,9 +1,9 @@
 package ScalaJS
 
 import ScalaJS.Component.{Main, Show}
-import helpers.HangPersonGame
 import japgolly.scalajs.react.extra.router.{BaseUrl, Redirect, Router, RouterConfigDsl}
 import japgolly.scalajs.react.vdom.Implicits._
+
 
 object AppRouter {
   case object Home extends View

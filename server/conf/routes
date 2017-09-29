@@ -14,6 +14,7 @@ POST    /hangperson/guess           controllers.HangPerson.guess
 GET     /hangperson/win             controllers.HangPerson.win
 GET     /hangperson/lose            controllers.HangPerson.lose
 GET     /hangperson/spa             controllers.HangPersonSpa.index
+GET     /hangperson/spa/randomWord  controllers.HangPersonSpa.getRandomWord
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

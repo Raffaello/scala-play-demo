@@ -65,7 +65,8 @@ object Settings {
     //    "com.lihaoyi" %% "utest" % versions.uTest % Test
     cache,
     ws,
-    specs2 % Test
+    specs2 % Test,
+    "org.specs2" %% "specs2-matcher-extra" % "3.8" % "test"
   ))
 
   /** Dependencies only used by the JS project (note the use of %%% instead of %%) */

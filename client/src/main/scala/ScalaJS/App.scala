@@ -1,6 +1,5 @@
 package ScalaJS
 
-import ScalaJS.Component.Main
 import org.scalajs.dom.document
 
 import scala.scalajs.js.JSApp
