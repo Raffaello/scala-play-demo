@@ -11,6 +11,12 @@ class HangPersonSpa @Inject()(val ws: WSClient) extends Controller with RandomWo
     Ok(views.html.HangPerson.spa.index())
   }
 
+  /**
+    * @TODO: if someone inspect the network tab of the browser can read the word and cheat.
+    *       find a solution to communicate in a secure way the data among client and server.
+    *       try use JWT
+    *
+    */
   def getRandomWord = Action {
     val json: JsValue = JsObject(Seq(
       "word" -> JsString(randomWord)

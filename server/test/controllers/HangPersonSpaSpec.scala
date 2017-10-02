@@ -20,6 +20,6 @@ class HangPersonSpaSpec extends PlaySpecification with JsonMatchers {
     contentType(response) must beSome("application/json")
 
     val wordLength = (contentAsJson(response) \ "word").getOrElse(JsString("")).as[String].length()
-    contentAsString(response) must /("word" -> s"[a-z]{${wordLength}}".r)
+    contentAsString(response) must /("word" -> s"[a-z]{$wordLength}".r)
   }
 }

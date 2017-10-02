@@ -10,7 +10,7 @@ object Main {
   val component = ScalaComponent.builder[RouterCtl[View]]("Main")
     .render_P( ctl =>
       <.div(^.cls := "panel-footer",
-        <.a(^.cls := "btn btn-primary", ^.id := "newgame", ^.value := "New Game", ctl setOnClick Play)
+        <.a(^.cls := "btn btn-primary", ^.id := "newgame", ^.value := "New Game", ctl setOnClick Play, "New Game")
       )
     )
     .build
