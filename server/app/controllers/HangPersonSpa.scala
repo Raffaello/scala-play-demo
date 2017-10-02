@@ -12,9 +12,9 @@ class HangPersonSpa @Inject()(val ws: WSClient) extends Controller with RandomWo
   }
 
   /**
-    * @TODO: if someone inspect the network tab of the browser can read the word and cheat.
+    * TODO: if someone inspect the network tab of the browser can read the word and cheat.
     *       find a solution to communicate in a secure way the data among client and server.
-    *       try use JWT
+    *       try use JWT or just an encrypted one
     *
     */
   def getRandomWord = Action {
