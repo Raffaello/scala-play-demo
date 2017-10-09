@@ -3,18 +3,18 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                               controllers.Application.index
 
-GET     /hangperson                 controllers.Default.redirect(to = "/hangperson/new")
-GET     /hangperson/new             controllers.HangPerson.newAction
-GET     /hangperson/create          controllers.Default.redirect(to = "/hangperson/show")
-POST    /hangperson/create          controllers.HangPerson.create
-GET     /hangperson/show            controllers.HangPerson.show
-POST    /hangperson/guess           controllers.HangPerson.guess
-GET     /hangperson/win             controllers.HangPerson.win
-GET     /hangperson/lose            controllers.HangPerson.lose
-GET     /hangperson/spa             controllers.HangPersonSpa.index
-GET     /hangperson/spa/randomWord  controllers.HangPersonSpa.getRandomWord
+GET     /hangperson                     controllers.Default.redirect(to = "/hangperson/new")
+GET     /hangperson/new                 controllers.HangPerson.newAction
+GET     /hangperson/create              controllers.Default.redirect(to = "/hangperson/show")
+POST    /hangperson/create              controllers.HangPerson.create
+GET     /hangperson/show                controllers.HangPerson.show
+POST    /hangperson/guess               controllers.HangPerson.guess
+GET     /hangperson/win                 controllers.HangPerson.win
+GET     /hangperson/lose                controllers.HangPerson.lose
+GET     /hangperson/spa                 controllers.HangPersonSpa.index
+GET     /hangperson/spa/api/randomWord  controllers.HangPersonSpa.getRandomWord
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
