@@ -35,7 +35,7 @@ object Settings {
     val scalaDom = "0.9.1"
     val scalajsReact = "1.0.1"
     //    val log4js = "1.4.10"
-    //    val autowire = "0.2.5"
+        val autowire = "0.2.5"
     //    val booPickle = "1.2.5"
     //    val diode = "1.1.0"
     //    val uTest = "0.4.4"
@@ -45,6 +45,8 @@ object Settings {
     val compass = "1.0.2"
     val fontawesome = "4.3.0-1"
     val scalajsScripts = "1.0.0"
+    val specs2Extra = "3.8"
+    val circe = "0.8"
   }
 
   /**
@@ -52,7 +54,7 @@ object Settings {
     * the special %%% function selects the correct version for each project
     */
   val sharedDependencies = Def.setting(Seq(
-    //    "com.lihaoyi" %%% "autowire" % versions.autowire,
+        "com.lihaoyi" %%% "autowire" % Versions.autowire
     //    "me.chrons" %%% "boopickle" % versions.booPickle
   ))
 
@@ -65,7 +67,8 @@ object Settings {
     //    "com.lihaoyi" %% "utest" % versions.uTest % Test
     cache,
     ws,
-    specs2 % Test
+    specs2 % Test,
+    "org.specs2" %% "specs2-matcher-extra" % Versions.specs2Extra % "test"
   ))
 
   /** Dependencies only used by the JS project (note the use of %%% instead of %%) */

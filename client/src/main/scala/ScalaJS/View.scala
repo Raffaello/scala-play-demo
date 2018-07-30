@@ -1,0 +1,5 @@
+package ScalaJS
+
+trait View {
+
+}
