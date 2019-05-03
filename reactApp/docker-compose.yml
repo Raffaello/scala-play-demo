@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  
+  react-client:
+    container_name: react-client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ':/usr/src/client'
+      - '/usr/src/client/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+
+
